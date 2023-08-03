@@ -1,3 +1,25 @@
+import genericPage from "../../pages/generic-page";
+import homePage from "../../pages/home-page";
+import loginPage from "../../pages/login-page";
+import signupPage from "../../pages/signup-page";
+
+
+const username = Cypress.env('username');
+const email = Cypress.env('email');
+const password = Cypress.env('password');
+const wrongPassword = Cypress.env('wrongPassword');
+const { day, month, year } = Cypress.env('birthday');
+const firstName = Cypress.env('firstName');
+const lastName = Cypress.env('lastName');
+const company = Cypress.env('company');
+const address = Cypress.env('address');
+const address2 = Cypress.env('address2');
+const country = Cypress.env('country');
+const state = Cypress.env('state');
+const city = Cypress.env('city');
+const zipCode = Cypress.env('zipCode');
+const mobileNumber = Cypress.env('mobileNumber');
+
 describe("Tests cases for register and login user feature", () => {
 
     beforeEach("Visit main page", () => {
@@ -5,135 +27,135 @@ describe("Tests cases for register and login user feature", () => {
     });
 
     it("Register user and delete it", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.signup-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getSignUpFormTitle()
             .should('be.visible')
             .and('have.text', 'New User Signup!');
-        cy.getByData("signup-name").type('jose');
-        cy.getByData("signup-email").type('correo@dominio.com');
-        cy.getByData("signup-button").click();
-        cy.get('.login-form').find('h2:first')
+        loginPage.getNameInput().type(username);
+        loginPage.getEmailSignupInput().type(email);
+        loginPage.getSignUpButton().click();
+        signupPage.getSignupFormTitle()
             .should('be.visible')
-            .contains(/ENTER ACCOUNT INFORMATION/i);
-        cy.getByData("title").its(0).find('input').click();
-        cy.getByData("password").type('1234567890');
-        cy.getByData("days").select('14');
-        cy.getByData("months").select('1');
-        cy.getByData("years").select('1990');
-        cy.get('#newsletter').click();
-        cy.get('#optin').click();
-        cy.getByData("first_name").type('jose');
-        cy.getByData("last_name").type('king');
-        cy.getByData("company").type('company');
-        cy.getByData("address").type('street 30');
-        cy.getByData("address2").type('street 33');
-        cy.getByData("country").select('United States');
-        cy.getByData("state").type('California');
-        cy.getByData("city").type('Las vegas');
-        cy.getByData("zipcode").type('1234');
-        cy.getByData("mobile_number").type('12345678900');
-        cy.getByData("create-account").click();
-        cy.getByData("account-created")
+            .contains('Enter Account Information', { matchCase: false });
+        signupPage.getTitleRadioButton(0).click();
+        signupPage.getPasswordInput().type(password);
+        signupPage.getDayInput().select(day);
+        signupPage.getMonthInput().select(month);
+        signupPage.getYearInput().select(year);
+        signupPage.getNewsletterCheckbox().click();
+        signupPage.getOffersCheckbox().click();
+        signupPage.getFirstNameInput().type(firstName);
+        signupPage.getLastNameInput().type(lastName);
+        signupPage.getCompanyInput().type(company);
+        signupPage.getAddressInput().type(address);
+        signupPage.getAddress2Input().type(address2);
+        signupPage.getCountryDropdown().select(country);
+        signupPage.getStateInput().type(state);
+        signupPage.getCityInput().type(city);
+        signupPage.getZipCodeInput().type(zipCode);
+        signupPage.getMobileNumberInput().type(mobileNumber);
+        signupPage.getCreateAccountButton().click();
+        genericPage.getAccountCreatedTitle()
             .should('be.visible')
-            .contains(/ACCOUNT CREATED!/i);
-        cy.getByData("continue-button").click();
-        cy.get('.navbar-nav').find('li:last')
+            .contains(/^account\s\w+/gmi);
+        genericPage.getContinueButton().click();
+        homePage.getLoggedInAsMenuItem()
             .should('be.visible')
             .and('contain.text', 'Logged in as jose');
-        cy.get('a[href="/delete_account"]').click();
-        cy.getByData("account-deleted")
+        homePage.getDeleteAccountMenuItem().click();
+        genericPage.getAccountDeletedTitle()
             .should('be.visible')
-            .contains(/ACCOUNT DELETED!/i);
+            .contains(/^account\s\w+/gmi);
     });
 
     it("Register user without deleting account", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.signup-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getSignUpFormTitle()
             .should('be.visible')
             .and('have.text', 'New User Signup!');
-        cy.getByData("signup-name").type('jose');
-        cy.getByData("signup-email").type('correo@dominio.com');
-        cy.getByData("signup-button").click();
-        cy.get('.login-form').find('h2:first')
+        loginPage.getNameInput().type(username);
+        loginPage.getEmailSignupInput().type(email);
+        loginPage.getSignUpButton().click();
+        signupPage.getSignupFormTitle()
             .should('be.visible')
-            .contains(/ENTER ACCOUNT INFORMATION/i);
-        cy.getByData("title").its(0).find('input').click();
-        cy.getByData("password").type('1234567890');
-        cy.getByData("days").select('14');
-        cy.getByData("months").select('1');
-        cy.getByData("years").select('1990');
-        cy.get('#newsletter').click();
-        cy.get('#optin').click();
-        cy.getByData("first_name").type('jose');
-        cy.getByData("last_name").type('king');
-        cy.getByData("company").type('company');
-        cy.getByData("address").type('street 30');
-        cy.getByData("address2").type('street 33');
-        cy.getByData("country").select('United States');
-        cy.getByData("state").type('California');
-        cy.getByData("city").type('Las vegas');
-        cy.getByData("zipcode").type('1234');
-        cy.getByData("mobile_number").type('12345678900');
-        cy.getByData("create-account").click();
-        cy.getByData("account-created")
+            .contains('Enter Account Information', { matchCase: false });
+        signupPage.getTitleRadioButton(0).click();
+        signupPage.getPasswordInput().type(password);
+        signupPage.getDayInput().select(day);
+        signupPage.getMonthInput().select(month);
+        signupPage.getYearInput().select(year);
+        signupPage.getNewsletterCheckbox().click();
+        signupPage.getOffersCheckbox().click();
+        signupPage.getFirstNameInput().type(firstName);
+        signupPage.getLastNameInput().type(lastName);
+        signupPage.getCompanyInput().type(company);
+        signupPage.getAddressInput().type(address);
+        signupPage.getAddress2Input().type(address2);
+        signupPage.getCountryDropdown().select(country);
+        signupPage.getStateInput().type(state);
+        signupPage.getCityInput().type(city);
+        signupPage.getZipCodeInput().type(zipCode);
+        signupPage.getMobileNumberInput().type(mobileNumber);
+        signupPage.getCreateAccountButton().click();
+        genericPage.getAccountCreatedTitle()
             .should('be.visible')
-            .contains(/ACCOUNT CREATED!/i);
+            .contains(/^account\s\w+/gmi);
     });
 
     it("Register user with existing email", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.signup-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getSignUpFormTitle()
             .should('be.visible')
             .and('have.text', 'New User Signup!');
-        cy.getByData("signup-name").type('jose');
-        cy.getByData("signup-email").type('correo@dominio.com');
-        cy.getByData("signup-button").click();
-        cy.get('.signup-form').find('p')
+        loginPage.getNameInput().type(username);
+        loginPage.getEmailSignupInput().type(email);
+        loginPage.getSignUpButton().click();
+        loginPage.getErrorSignupLabel()
             .should('be.visible')
             .and('have.text', 'Email Address already exist!');
     });
 
     it("Logout user", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.login-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getLoginFormTitle()
             .should('be.visible')
             .and('have.text', 'Login to your account');
-        cy.getByData("login-email").type('correo@dominio.com');
-        cy.getByData("login-password").type('1234567890');
-        cy.getByData("login-button").click();
-        cy.get('.navbar-nav').find('li:last')
+        loginPage.getEmailLoginInput().type(email);
+        loginPage.getPasswordInput().type(password);
+        loginPage.getLoginButton().click();
+        homePage.getLoggedInAsMenuItem()
             .should('be.visible')
             .and('contain.text', 'Logged in as jose');
-        cy.get('a[href="/logout"]').click();
-        cy.location('pathname', '/login')
+        homePage.getLogoutMenuItem().click();
+        cy.location('pathname', '/login');
     });
 
     it("Login user with correct email and password and delete it", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.login-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getLoginFormTitle()
             .should('be.visible')
             .and('have.text', 'Login to your account');
-        cy.getByData("login-email").type('correo@dominio.com');
-        cy.getByData("login-password").type('1234567890');
-        cy.getByData("login-button").click();
-        cy.get('.navbar-nav').find('li:last')
+        loginPage.getEmailLoginInput().type(email);
+        loginPage.getPasswordInput().type(password);
+        loginPage.getLoginButton().click();
+        homePage.getLoggedInAsMenuItem()
             .should('be.visible')
             .and('contain.text', 'Logged in as jose');
-        cy.get('a[href="/delete_account"]').click();
-        cy.getByData("account-deleted")
+        homePage.getDeleteAccountMenuItem().click();
+        genericPage.getAccountDeletedTitle()
             .should('be.visible')
             .contains(/ACCOUNT DELETED!/i);
     });
 
     it("Login user with incorrect email and password", () => {
-        cy.get('a[href="/login"]').click();
-        cy.get('.login-form').find('h2')
+        homePage.getLoginSignUpMenuItem().click();
+        loginPage.getLoginFormTitle()
             .should('be.visible')
             .and('have.text', 'Login to your account');
-        cy.getByData("login-email").type('correo@dominio.com');
-        cy.getByData("login-password").type('123');
-        cy.getByData("login-button").click();
-        cy.get('.login-form').find('p')
+        loginPage.getEmailLoginInput().type(email);
+        loginPage.getPasswordInput().type(wrongPassword);
+        loginPage.getLoginButton().click();
+        loginPage.getErrorLoginLabel()
             .should('be.visible')
             .and('have.text', 'Your email or password is incorrect!');
     });
