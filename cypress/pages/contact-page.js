@@ -34,6 +34,31 @@ class ContactPage {
         return cy.get('.status.alert-success');
     }
 
+    assertFormTitle(){
+        this.getFormTitle().should('have.text', 'Get In Touch');
+    }
+
+    fillContactUsForm(userData){
+        const { username, email, contact } = userData;
+        const { subject, message, pathFile } = contact;
+
+        this.getNameInput().type(username);
+        this.getEmailInput().type(email);
+        this.getSubjectInput().type(subject);
+        this.getMessageInput().type(message);
+        this.getChooseFileButton().selectFile(pathFile);
+    }
+
+    clickSubmitButton(){
+        this.getSubmitButton().click();
+    }
+
+    assertLabel(message){
+        this.getSuccessLabel()
+            .should('be.visible')
+            .and('have.text', message);
+    }
+
 }
 
 export default new ContactPage();

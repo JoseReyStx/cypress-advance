@@ -30,6 +30,10 @@ class HomePage {
         return this.getNavBar().find('a[href="/delete_account"]');
     }
 
+    clickNavBarItem(item) {
+        this.getNavBar().contains(item).click();
+    }
+
 }
 
 export default new HomePage();

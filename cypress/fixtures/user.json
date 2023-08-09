@@ -1,0 +1,25 @@
+{
+  "username": "aartyszko",
+  "email": "aartyszko@gmail.com",
+  "password": "test1212",
+  "wrongPassword": "",
+  "birthday": {
+      "day": "",
+      "month": "",
+      "year": ""
+  },
+  "firstName": "",
+  "lastName": "",
+  "company": "",
+  "address": "",
+  "address2": "",
+  "country": "",
+  "state": "",
+  "city": "",
+  "zipCode": "",
+  "mobileNumber": "",
+  "contact": {
+      "subject": "test",
+      "message": "test",
+      "pathFile": "assets/1.jpg"  }
+}
