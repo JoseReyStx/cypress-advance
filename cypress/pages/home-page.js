@@ -34,6 +34,12 @@ class HomePage {
         this.getNavBar().contains(item).click();
     }
 
+    assertUserLoggedInMenuItem(userData) {
+        const { username } = userData;
+        this.getLoggedInAsMenuItem().should('be.visible')
+            .and('contain.text', `Logged in as ${username}`);
+    }
+
 }
 
 export default new HomePage();

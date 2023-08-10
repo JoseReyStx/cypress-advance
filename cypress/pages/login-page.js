@@ -29,7 +29,7 @@ class LoginPage {
     getEmailLoginInput() {
         return cy.getByData("login-email");
     }
-    
+
     getPasswordInput() {
         return cy.getByData("login-password");
     }
@@ -48,6 +48,51 @@ class LoginPage {
 
     getErrorSignupLabel() {
         return this.getSignUpForm().find('p');
+    }
+
+    assertSignUpFormTitle() {
+        this.getSignUpFormTitle().should('have.text', 'New User Signup!');
+    }
+
+    assertLoginFormTitle() {
+        this.getLoginFormTitle().should('have.text', 'Login to your account');
+    }
+
+    fillSignUpPreForm(userData) {
+        const { username, email } = userData;
+        this.getNameInput().type(username);
+        this.getEmailSignupInput().type(email);
+    }
+
+    fillLoginForm(userData, wrong = false) {
+        const { email, password, wrongPassword } = userData;
+        if (wrong) {
+            this.getEmailLoginInput().type(email);
+            this.getPasswordInput().type(wrongPassword);
+        } else {
+            this.getEmailLoginInput().type(email);
+            this.getPasswordInput().type(password);
+        }
+    }
+
+    clickSubmitButton() {
+        this.getSignUpButton().click();
+    }
+
+    clickLoginButton() {
+        this.getLoginButton().click();
+    }
+
+    assertExistenUserErrorLabel() {
+        this.getErrorSignupLabel()
+            .should('be.visible')
+            .and('have.text', 'Email Address already exist!')
+    }
+
+    assertCredentialsLabel() {
+        this.getErrorLoginLabel()
+            .should('be.visible')
+            .and('have.text', 'Your email or password is incorrect!');
     }
 
 }

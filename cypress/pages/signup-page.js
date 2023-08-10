@@ -8,8 +8,8 @@ class SignupPage {
         return loginPage.getLoginFormTitle();
     }
 
-    getTitleRadioButton(option) {
-        return cy.getByData("title").its(option).find('input');
+    getTitleRadioButton(title) {
+        return cy.getByData("title").find(`input[value="${title}"]`);
     }
 
     getPasswordInput() {
@@ -82,6 +82,50 @@ class SignupPage {
 
     getCreateAccountButton() {
         return cy.getByData("create-account");
+    }
+
+    assertSignUpFormTitle() {
+        this.getSignupFormTitle().should('be.visible').and('contain', 'Enter Account Information');
+    }
+
+    fillSignUpForm(userData) {
+        const {
+            title,
+            password,
+            birthday,
+            firstName,
+            lastName,
+            company,
+            address,
+            address2,
+            country,
+            state,
+            city,
+            zipCode,
+            mobileNumber
+        } = userData;
+        const { day, month, year } = birthday;
+        this.getTitleRadioButton(title).click();
+        this.getPasswordInput().type(password);
+        this.getDayInput().select(day);
+        this.getMonthInput().select(month);
+        this.getYearInput().select(year);
+        this.getNewsletterCheckbox().check();
+        this.getOffersCheckbox().check();
+        this.getFirstNameInput().type(firstName);
+        this.getLastNameInput().type(lastName);
+        this.getCompanyInput().type(company);
+        this.getAddressInput().type(address);
+        this.getAddress2Input().type(address2);
+        this.getCountryDropdown().select(country);
+        this.getStateInput().type(state);
+        this.getCityInput().type(city);
+        this.getZipCodeInput().type(zipCode);
+        this.getMobileNumberInput().type(mobileNumber);
+    }
+
+    clickCreateAccountButton() {
+        this.getCreateAccountButton().click();
     }
 
 }

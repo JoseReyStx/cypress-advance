@@ -1,25 +1,27 @@
 {
-  "username": "aartyszko",
-  "email": "aartyszko@gmail.com",
-  "password": "test1212",
-  "wrongPassword": "",
-  "birthday": {
-      "day": "",
-      "month": "",
-      "year": ""
-  },
-  "firstName": "",
-  "lastName": "",
-  "company": "",
-  "address": "",
-  "address2": "",
-  "country": "",
-  "state": "",
-  "city": "",
-  "zipCode": "",
-  "mobileNumber": "",
-  "contact": {
-      "subject": "test",
-      "message": "test",
-      "pathFile": "assets/1.jpg"  }
+    "username": "jose",
+    "email": "correo@dominio.com",
+    "password": "1234567890",
+    "wrongPassword": "1234",
+    "title": "Mr",
+    "birthday": {
+        "day": "14",
+        "month": "1",
+        "year": "1990"
+    },
+    "firstName": "jose",
+    "lastName": "king",
+    "company": "company",
+    "address": "street 30",
+    "address2": "street 33",
+    "country": "United States",
+    "state": "california",
+    "city": "los angeles",
+    "zipCode": "1234",
+    "mobileNumber": "12345678900",
+    "contact": {
+        "subject": "hello",
+        "message": "this is a test",
+        "pathFile": "assets/1.jpg"
+    }
 }
