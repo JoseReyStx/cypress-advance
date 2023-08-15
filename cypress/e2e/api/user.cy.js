@@ -36,25 +36,6 @@ describe("Testing products API", () => {
         });
     });
 
-    it("POST To Verify Login with valid credentials", () => {
-        const { email, password } = userData;
-        cy.request({
-            method: 'POST',
-            url: '/api/verifyLogin',
-            form: true,
-            body: {
-                email: email,
-                password: password
-            }
-        }).then((response) => {
-            const data = JSON.parse(response.body);
-            const { responseCode, message } = data;
-
-            expect(responseCode).to.be.eq(200);
-            expect(message).to.have.string('User exists!');
-        });
-    });
-
     it("POST To Verify Login without email parameter", () => {
         const { password } = userData;
         cy.request({
@@ -155,6 +136,43 @@ describe("Testing products API", () => {
         });
     });
 
+    it("POST To Verify Login with valid credentials", () => {
+        const { email, password } = userData;
+        cy.request({
+            method: 'POST',
+            url: '/api/verifyLogin',
+            form: true,
+            body: {
+                email: email,
+                password: password
+            }
+        }).then((response) => {
+            const data = JSON.parse(response.body);
+            const { responseCode, message } = data;
+
+            expect(responseCode).to.be.eq(200);
+            expect(message).to.have.string('User exists!');
+        });
+    });
+
+    it("GET user account detail by email", () => {
+        const { email } = userData;
+        cy.request({
+            method: 'GET',
+            url: '/api/getUserDetailByEmail',
+            form: true,
+            qs: {
+                email: email
+            }
+        }).then((response) => {
+            const data = JSON.parse(response.body);
+            const {responseCode, user } = data;
+            
+            expect(responseCode).to.eq(200);
+            expect(user).to.not.be.empty;
+        });
+    });
+
     it("PUT METHOD To Update User Account With New City", () => {
         const {
             username,
@@ -224,21 +242,4 @@ describe("Testing products API", () => {
         });
     });
 
-    it.only("GET user account detail by email", () => {
-        const { email } = userData;
-        cy.request({
-            method: 'GET',
-            url: '/api/getUserDetailByEmail',
-            form: true,
-            qs: {
-                email: email
-            }
-        }).then((response) => {
-            const data = JSON.parse(response.body);
-            const {responseCode, user } = data;
-            
-            expect(responseCode).to.eq(200);
-            expect(user).to.not.be.empty;
-        });
-    });
 });
