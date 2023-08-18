@@ -7,7 +7,7 @@ The purpose of this repository is to practice some advance cypress topics
 npm install
 ```
 
-**Copy `cypress.env.json.template` into `cypress.env.json` and fill data**
+**Copy `fixture/user.json.template` into `fixture/user.json` and fill data**
 
 ## Run test cases
 
