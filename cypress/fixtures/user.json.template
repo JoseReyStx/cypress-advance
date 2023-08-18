@@ -3,7 +3,7 @@
     "email": "",
     "password": "",
     "wrongPassword": "",
-    "title": "Mr",
+    "title": "",
     "birthday": {
         "day": "",
         "month": "",
@@ -23,5 +23,12 @@
         "subject": "",
         "message": "",
         "pathFile": ""
+    },
+    "review": "",
+    "payment": {
+        "cardNumber": "",
+        "cvc": "",
+        "expirationMonth": "",
+        "expirationYear": ""
     }
 }
