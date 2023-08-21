@@ -1,4 +1,7 @@
 {
+    "scripts": {
+    "test": "cypress open"
+  },
   "devDependencies": {
     "cypress": "^12.17.2"
   }
