@@ -2,7 +2,7 @@
 
 let userData;
 
-describe("Testing products API", () => {
+describe("Testing user API", () => {
 
     beforeEach("Visit main page", () => {
         cy.visit('/');
