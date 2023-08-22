@@ -9,7 +9,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with: 
-          start: npx cypress run
+          start: npm test
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
         if: failure()
