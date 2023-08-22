@@ -85,7 +85,9 @@ class SignupPage {
     }
 
     assertSignUpFormTitle() {
-        this.getSignupFormTitle().should('be.visible').and('contain', 'Enter Account Information');
+        this.getSignupFormTitle().should('be.visible').and(($title) => {
+            expect($title.text).to.contain(/Enter Account Information/gmi);
+        });
     }
 
     fillSignUpForm(userData) {

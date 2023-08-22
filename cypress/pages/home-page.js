@@ -18,8 +18,8 @@ class HomePage {
         return this.getNavBar().find('a[href="/logout"]');
     }
 
-    getLoggedInAsMenuItem() {
-        return this.getNavBar().find('li:last');
+    getLoggedInAsMenuItem(username) {
+        return this.getNavBar().contains(`Logged in as ${username}`, { matchCase: false });
     }
 
     getContactUsMenuItem() {
@@ -44,7 +44,7 @@ class HomePage {
 
     assertUserLoggedInMenuItem(userData) {
         const { username } = userData;
-        this.getLoggedInAsMenuItem().should('be.visible')
+        this.getLoggedInAsMenuItem(username).should('be.visible')
             .and('contain.text', `Logged in as ${username}`);
     }
 

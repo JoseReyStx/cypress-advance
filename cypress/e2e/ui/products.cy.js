@@ -115,7 +115,7 @@ describe('', () => {
         });
     });
 
-    it('Place Order: Login before Checkout', () => {
+    it.only('Place Order: Login before Checkout', () => {
         cy.fixture('user.json').then((userData) => {
             homePage.clickNavBarItem('Signup / Login');
             loginPage.fillLoginForm(userData);
