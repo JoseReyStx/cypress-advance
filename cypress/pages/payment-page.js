@@ -30,7 +30,7 @@ class PaymentPage {
     typePaymentInformation(userData) {
         const { firstName, lastName, payment } = userData;
         const { cardNumber, cvc, expirationMonth, expirationYear } = payment;
-        this.getInputNameOnCard().type(firstName + ' ' + lastName);
+        this.getInputNameOnCard().type(`${firstName} ${lastName}`);
         this.getInputCardNumber().type(cardNumber);
         this.getInputCardCVC().type(cvc);
         this.getInputCardExpirationMonth().type(expirationMonth);

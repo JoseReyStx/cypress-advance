@@ -1,3 +1,4 @@
+import common from "../../pages/common";
 import genericPage from "../../pages/generic-page";
 import homePage from "../../pages/home-page";
 import loginPage from "../../pages/login-page";
@@ -9,10 +10,10 @@ let userData;
 describe("Tests cases for register and login user feature", () => {
 
     beforeEach("Visit main page", () => {
-        cy.visit("/");
         cy.fixture('user.json').then((user) => {
             userData = user;
         });
+        cy.visit("/");
     });
 
     it("Register user and delete it", () => {
@@ -58,7 +59,7 @@ describe("Tests cases for register and login user feature", () => {
         loginPage.clickLoginButton();
         homePage.assertUserLoggedInMenuItem(userData);
         homePage.clickNavBarItem('Logout');
-        cy.location('pathname', '/login');
+        common.assertLocation();
     });
 
     it("Login user with correct email and password and delete it", () => {

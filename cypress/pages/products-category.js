@@ -5,8 +5,8 @@ class ProductsCategoryPage {
     }
 
     assertCategoryTitle(category) {
-        const re = new RegExp(`${category} - [a-zA-Z]+ products`, 'gmi');
-        this.getCategoryTitle().contains(re);
+        const titleRegEx = new RegExp(`${category} - [a-zA-Z]+ products`, 'gmi');
+        this.getCategoryTitle().contains(titleRegEx);
     }
 
 }

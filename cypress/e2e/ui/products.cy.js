@@ -1,4 +1,5 @@
 import checkoutPage from "../../pages/checkout-page";
+import common from "../../pages/common";
 import genericPage from "../../pages/generic-page";
 import homePage from "../../pages/home-page";
 import loginPage from "../../pages/login-page";
@@ -9,7 +10,7 @@ import productsPage from "../../pages/products-page";
 import signupPage from "../../pages/signup-page";
 import viewCartPage from "../../pages/view-cart-page";
 
-describe('', () => {
+describe('Test cases for products feature', () => {
 
     beforeEach('Visit main page', () => {
         cy.visit('/');
@@ -17,16 +18,17 @@ describe('', () => {
 
     it('Verify All Products and product detail page', () => {
         homePage.clickNavBarItem('Products');
-        cy.location('pathname').should('eq', '/products');
+        common.assertLocation();
         productsPage.assertProductList();
         productsPage.clickProduct();
-        cy.location('pathname').should('match', /product_details\/\d+/);
+        common.assertLocation();
         productDetailsPage.assertProductDetails();
     });
 
     it('Assert Searched Products are related', () => {
         homePage.clickNavBarItem('Products');
-        cy.location('pathname').should('eq', '/products');
+        // cy('pathname').should('eq', '/products');
+        common.assertLocation();
         productsPage.assertProductList();
         productsPage.searchProduct('jeans');
         productsPage.assertProductsTitle();
@@ -34,16 +36,16 @@ describe('', () => {
     });
 
     it('Verify Subscription in home page', () => {
-        homePage.assertFooterTitle();
         cy.fixture('user.json').then((userData) => {
+            homePage.assertFooterTitle();
             homePage.assertSubscription(userData);
         });
     });
 
     it('Verify Subscription in Cart page', () => {
-        homePage.clickNavBarItem('Cart');
-        homePage.assertFooterTitle();
         cy.fixture('user.json').then((userData) => {
+            homePage.clickNavBarItem('Cart');
+            homePage.assertFooterTitle();
             homePage.assertSubscription(userData);
         });
     });
@@ -57,7 +59,7 @@ describe('', () => {
     it('Verify Product quantity in Cart', () => {
         homePage.clickNavBarItem('Products');
         productsPage.clickProduct();
-        cy.location('pathname').should('match', /product_details\/\d+/);
+        common.assertLocation();
         productDetailsPage.typeQuantity(4);
         productDetailsPage.clickAddToCartButton();
         productDetailsPage.clickViewCart();
@@ -68,7 +70,7 @@ describe('', () => {
         cy.fixture('user.json').then((userData) => {
             homePage.clickNavBarItem('Products');
             productsPage.clickProduct();
-            cy.location('pathname').should('match', /product_details\/\d+/);
+            common.assertLocation();
             productDetailsPage.clickAddToCartButton();
             productDetailsPage.clickViewCart();
             viewCartPage.clickCheckOutButton();

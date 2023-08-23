@@ -60,13 +60,13 @@ class HomePage {
     }
 
     assertAndClickCategory(category) {
-        const re = new RegExp(`^.${category}`, 'gmi');
-        this.getSideBar().find('[data-toggle="collapse"]').contains(re).click();
+        const categoryRegEx = new RegExp(`^.${category}`, 'gmi');
+        this.getSideBar().find('[data-toggle="collapse"]').contains(categoryRegEx).click();
     }
 
     clickSubCategory(category) {
-        const re = new RegExp(`^.${category}`, 'gmi');
-        this.getSideBar().find('[data-toggle="collapse"]').contains(re).parents('.panel-default').find('.panel-body li > a').first().click();
+        const categoryRegEx = new RegExp(`^.${category}`, 'gmi');
+        this.getSideBar().find('[data-toggle="collapse"]').contains(categoryRegEx).parents('.panel-default').find('.panel-body li > a').first().click();
     }
 
 }

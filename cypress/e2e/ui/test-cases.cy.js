@@ -1,3 +1,4 @@
+import common from "../../pages/common";
 import homePage from "../../pages/home-page";
 
 describe("Test case for <test cases page>", () => {
@@ -7,8 +8,8 @@ describe("Test case for <test cases page>", () => {
     });
 
     it("Verify Test Cases Page is shown correctly", () => {
-        cy.location('pathname').should('eq', '/');
+        common.assertLocation();
         homePage.clickNavBarItem('Test Cases');
-        cy.location('pathname').should('eq', '/test_cases');
+        common.assertLocation();
     });
 });

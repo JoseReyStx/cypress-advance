@@ -5,10 +5,10 @@ let userData;
 describe("Testing user API", () => {
 
     beforeEach("Visit main page", () => {
-        cy.visit('/');
         cy.fixture('user.json').then((user) => {
             userData = user;
         });
+        cy.visit('/');
     });
 
     it("POST To Search Product with parameter 'search_product'", () => {
