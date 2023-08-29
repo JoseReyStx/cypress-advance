@@ -18,17 +18,16 @@ describe('Test cases for products feature', () => {
 
     it('Verify All Products and product detail page', () => {
         homePage.clickNavBarItem('Products');
-        common.assertLocation();
+        common.assertLocation('products');
         productsPage.assertProductList();
-        productsPage.clickProduct();
-        common.assertLocation();
+        productsPage.clickProduct('Winter Top');
+        common.assertLocation('/product_details');
         productDetailsPage.assertProductDetails();
     });
 
     it('Assert Searched Products are related', () => {
         homePage.clickNavBarItem('Products');
-        // cy('pathname').should('eq', '/products');
-        common.assertLocation();
+        common.assertLocation('/products');
         productsPage.assertProductList();
         productsPage.searchProduct('jeans');
         productsPage.assertProductsTitle();
@@ -58,8 +57,8 @@ describe('Test cases for products feature', () => {
 
     it('Verify Product quantity in Cart', () => {
         homePage.clickNavBarItem('Products');
-        productsPage.clickProduct();
-        common.assertLocation();
+        productsPage.clickProduct('Winter Top');
+        common.assertLocation('/product_details');
         productDetailsPage.typeQuantity(4);
         productDetailsPage.clickAddToCartButton();
         productDetailsPage.clickViewCart();
@@ -69,8 +68,8 @@ describe('Test cases for products feature', () => {
     it('Place Order: Register while Checkout', () => {
         cy.fixture('user.json').then((userData) => {
             homePage.clickNavBarItem('Products');
-            productsPage.clickProduct();
-            common.assertLocation();
+            productsPage.clickProduct('Winter Top');
+            common.assertLocation('/product_details');
             productDetailsPage.clickAddToCartButton();
             productDetailsPage.clickViewCart();
             viewCartPage.clickCheckOutButton();
@@ -105,7 +104,7 @@ describe('Test cases for products feature', () => {
             genericPage.clickContinueButton();
             homePage.assertUserLoggedInMenuItem(userData);
             homePage.clickNavBarItem('Products');
-            productsPage.clickProduct();
+            productsPage.clickProduct('Winter Top');
             productDetailsPage.clickAddToCartButton();
             productDetailsPage.clickViewCart();
             viewCartPage.clickCheckOutButton();
@@ -124,7 +123,7 @@ describe('Test cases for products feature', () => {
             loginPage.clickLoginButton();
             homePage.assertUserLoggedInMenuItem(userData);
             homePage.clickNavBarItem('Products');
-            productsPage.clickProduct();
+            productsPage.clickProduct('Winter Top');
             productDetailsPage.clickAddToCartButton();
             productDetailsPage.clickViewCart();
             viewCartPage.clickCheckOutButton();
@@ -153,21 +152,21 @@ describe('Test cases for products feature', () => {
         homePage.clickSubCategory('men');
         productsCategory.assertCategoryTitle('men');
     });
-    
+
     it('Add review on product', () => {
         cy.fixture('user.json').then((userData) => {
             homePage.clickNavBarItem('Products');
-            productsPage.clickProduct();
+            productsPage.clickProduct('Winter Top');
             productDetailsPage.fillReviewForm(userData);
             productDetailsPage.clickSubmitReview();
             productDetailsPage.assertReviewConfirmation();
         });
     });
-    
+
     it('Download Invoice after purchase order', () => {
         cy.fixture('user.json').then((userData) => {
             homePage.clickNavBarItem('Products');
-            productsPage.clickProduct();
+            productsPage.clickProduct('Winter Top');
             productDetailsPage.clickAddToCartButton();
             productDetailsPage.clickViewCart();
             viewCartPage.clickCheckOutButton();

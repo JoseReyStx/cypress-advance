@@ -5,9 +5,8 @@ class Common {
         });
     }
 
-    assertLocation() {
-        const location = new RegExp(/\/(products|product_details\/\d|login|test_cases)*/gmi);
-        cy.location('pathname').should('match', location);
+    assertLocation(pathname) {
+        cy.location('pathname').should('include', pathname);
     }
 }
 export default new Common();

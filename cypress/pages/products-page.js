@@ -21,8 +21,9 @@ class productsPage {
         return cy.get('h2.title');
     }
 
-    clickProduct() {
-        this.getProductItem().contains('View Product').first().click();
+    clickProduct(name) {
+        // this.getProductItem().contains('View Product').first().click();
+        this.getProductItem().contains(name).parents('.product-image-wrapper').contains('View Product').click();
     }
 
     clickAddToCart(productQuantity) {

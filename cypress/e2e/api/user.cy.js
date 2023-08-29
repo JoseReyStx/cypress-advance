@@ -8,7 +8,6 @@ describe("Testing user API", () => {
         cy.fixture('user.json').then((user) => {
             userData = user;
         });
-        cy.visit('/');
     });
 
     it("POST To Search Product with parameter 'search_product'", () => {

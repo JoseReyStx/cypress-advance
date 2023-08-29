@@ -1,10 +1,6 @@
 /// <reference types="cypress" />
 describe("Testing products API", () => {
 
-    beforeEach("Visit main page", () => {
-        cy.visit('/');
-    });
-
     it("Get All Products List", () => {
         cy.request('GET', '/api/productsList').then((response) => {
             const data = JSON.parse(response.body);

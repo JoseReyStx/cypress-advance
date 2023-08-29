@@ -59,7 +59,7 @@ describe("Tests cases for register and login user feature", () => {
         loginPage.clickLoginButton();
         homePage.assertUserLoggedInMenuItem(userData);
         homePage.clickNavBarItem('Logout');
-        common.assertLocation();
+        common.assertLocation('/login');
     });
 
     it("Login user with correct email and password and delete it", () => {

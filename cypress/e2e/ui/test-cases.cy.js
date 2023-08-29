@@ -8,8 +8,8 @@ describe("Test case for <test cases page>", () => {
     });
 
     it("Verify Test Cases Page is shown correctly", () => {
-        common.assertLocation();
+        common.assertLocation('/');
         homePage.clickNavBarItem('Test Cases');
-        common.assertLocation();
+        common.assertLocation('/test_cases');
     });
 });
