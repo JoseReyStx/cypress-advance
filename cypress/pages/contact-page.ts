@@ -1,44 +1,45 @@
 /// <reference types="Cypress" />
 
-class ContactPage {
+import { User } from "cypress/interfaces/user";
 
+class ContactPage {
     getFormTitle() {
         return cy.get('.contact-form').find('h2.title');
     }
 
-    getNameInput(){
+    getNameInput() {
         return cy.getByData('name');
     }
 
-    getEmailInput(){
+    getEmailInput() {
         return cy.getByData('email');
     }
 
-    getSubjectInput(){
+    getSubjectInput() {
         return cy.getByData('subject');
     }
 
-    getMessageInput(){
+    getMessageInput() {
         return cy.getByData('message');
     }
-    
-    getChooseFileButton(){
+
+    getChooseFileButton() {
         return cy.get('[type="file"].form-control');
     }
 
-    getSubmitButton(){
+    getSubmitButton() {
         return cy.getByData('submit-button');
     }
 
-    getSuccessLabel(){
+    getSuccessLabel() {
         return cy.get('.status.alert-success');
     }
 
-    assertFormTitle(){
+    assertFormTitle() {
         this.getFormTitle().should('have.text', 'Get In Touch');
     }
 
-    fillContactUsForm(userData){
+    fillContactUsForm(userData: User) {
         const { username, email, contact } = userData;
         const { subject, message, pathFile } = contact;
 
@@ -49,16 +50,13 @@ class ContactPage {
         this.getChooseFileButton().selectFile(pathFile);
     }
 
-    clickSubmitButton(){
+    clickSubmitButton() {
         this.getSubmitButton().click();
     }
 
-    assertLabel(message){
-        this.getSuccessLabel()
-            .should('be.visible')
-            .and('have.text', message);
+    assertLabel(message: string) {
+        this.getSuccessLabel().should('be.visible').and('have.text', message);
     }
-
 }
 
 export default new ContactPage();

@@ -1,10 +1,11 @@
 /// <reference types="cypress" />
 
-let userData;
+import { User } from 'cypress/interfaces/user';
 
-describe("Testing user API", () => {
+let userData: User;
 
-    beforeEach("Visit main page", () => {
+describe('Testing user API', () => {
+    beforeEach('Visit main page', () => {
         cy.fixture('user.json').then((user) => {
             userData = user;
         });
@@ -16,8 +17,8 @@ describe("Testing user API", () => {
             url: '/api/searchProduct',
             form: true,
             body: {
-                search_product: "jeans"
-            }
+                search_product: 'jeans',
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(200);
@@ -25,48 +26,54 @@ describe("Testing user API", () => {
         });
     });
 
-    it("POST To Search Product without search_product parameter", () => {
+    it('POST To Search Product without search_product parameter', () => {
         cy.request('POST', '/api/searchProduct').then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.be.eq(400);
-            expect(message).to.contain('Bad request, search_product parameter is missing in POST request.');
+            expect(message).to.contain(
+                'Bad request, search_product parameter is missing in POST request.'
+            );
         });
     });
 
-    it("POST To Verify Login without email parameter", () => {
+    it('POST To Verify Login without email parameter', () => {
         const { password } = userData;
         cy.request({
             method: 'POST',
             url: '/api/verifyLogin',
             form: true,
             body: {
-                password: password
-            }
+                password: password,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.be.eq(400);
-            expect(message).to.have.string('Bad request, email or password parameter is missing in POST request.');
+            expect(message).to.have.string(
+                'Bad request, email or password parameter is missing in POST request.'
+            );
         });
     });
 
-    it("DELETE Not Supported To Verify Login", () => {
+    it('DELETE Not Supported To Verify Login', () => {
         cy.request({
             method: 'DELETE',
-            url: '/api/verifyLogin'
+            url: '/api/verifyLogin',
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.be.eq(405);
-            expect(message).to.have.string('This request method is not supported.');
+            expect(message).to.have.string(
+                'This request method is not supported.'
+            );
         });
     });
 
-    it("POST To Verify Login with invalid details", () => {
+    it('POST To Verify Login with invalid details', () => {
         const { email, wrongPassword } = userData;
         cy.request({
             method: 'POST',
@@ -74,8 +81,8 @@ describe("Testing user API", () => {
             form: true,
             body: {
                 email: email,
-                password: wrongPassword
-            }
+                password: wrongPassword,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
@@ -85,7 +92,7 @@ describe("Testing user API", () => {
         });
     });
 
-    it("POST To Create/Register User Account", () => {
+    it('POST To Create/Register User Account', () => {
         const {
             username,
             email,
@@ -101,7 +108,7 @@ describe("Testing user API", () => {
             state,
             city,
             zipCode,
-            mobileNumber
+            mobileNumber,
         } = userData;
         cy.request({
             method: 'POST',
@@ -124,18 +131,18 @@ describe("Testing user API", () => {
                 zipcode: zipCode,
                 state: state,
                 city: city,
-                mobile_number: mobileNumber
-            }
+                mobile_number: mobileNumber,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.eq(201);
-            expect(message).to.contain("User created!");
+            expect(message).to.contain('User created!');
         });
     });
 
-    it("POST To Verify Login with valid credentials", () => {
+    it('POST To Verify Login with valid credentials', () => {
         const { email, password } = userData;
         cy.request({
             method: 'POST',
@@ -143,8 +150,8 @@ describe("Testing user API", () => {
             form: true,
             body: {
                 email: email,
-                password: password
-            }
+                password: password,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
@@ -154,25 +161,25 @@ describe("Testing user API", () => {
         });
     });
 
-    it("GET user account detail by email", () => {
+    it('GET user account detail by email', () => {
         const { email } = userData;
         cy.request({
             method: 'GET',
             url: '/api/getUserDetailByEmail',
             form: true,
             qs: {
-                email: email
-            }
+                email: email,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
-            const {responseCode, user } = data;
-            
+            const { responseCode, user } = data;
+
             expect(responseCode).to.eq(200);
             expect(user).to.not.be.empty;
         });
     });
 
-    it("PUT METHOD To Update User Account With New City", () => {
+    it('PUT METHOD To Update User Account With New City', () => {
         const {
             username,
             email,
@@ -186,9 +193,8 @@ describe("Testing user API", () => {
             address2,
             country,
             state,
-            city,
             zipCode,
-            mobileNumber
+            mobileNumber,
         } = userData;
         cy.request({
             method: 'PUT',
@@ -211,18 +217,18 @@ describe("Testing user API", () => {
                 zipcode: zipCode,
                 state: state,
                 city: 'San Diego',
-                mobile_number: mobileNumber
-            }
+                mobile_number: mobileNumber,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.eq(200);
-            expect(message).to.contain("User updated!");
+            expect(message).to.contain('User updated!');
         });
     });
 
-    it("DELETE METHOD To Delete User Account", () => {
+    it('DELETE METHOD To Delete User Account', () => {
         const { email, password } = userData;
         cy.request({
             method: 'DELETE',
@@ -230,15 +236,14 @@ describe("Testing user API", () => {
             form: true,
             body: {
                 email: email,
-                password: password
-            }
+                password: password,
+            },
         }).then((response) => {
             const data = JSON.parse(response.body);
             const { responseCode, message } = data;
 
             expect(responseCode).to.eq(200);
-            expect(message).to.contain("Account deleted!");
+            expect(message).to.contain('Account deleted!');
         });
     });
-
 });

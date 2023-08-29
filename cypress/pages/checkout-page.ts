@@ -7,7 +7,7 @@ class CheckOutPage {
         return cy.contains('place order', { matchCase: false });
     }
 
-    typeDetails(text) {
+    typeDetails(text: string) {
         this.getTextArea().type(text);
     }
 

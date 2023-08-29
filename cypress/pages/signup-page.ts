@@ -1,35 +1,31 @@
 /// <reference types="Cypress" />
 
-import loginPage from "./login-page";
+import { User } from 'cypress/interfaces/user';
+import loginPage from 'pages/login-page';
 
 class SignupPage {
-
     getSignupFormTitle() {
         return loginPage.getLoginFormTitle();
     }
 
-    getTitleRadioButton(title) {
-        return cy.getByData("title").find(`input[value="${title}"]`);
+    getTitleRadioButton(title: string) {
+        return cy.getByData('title').find(`input[value="${title}"]`);
     }
 
     getPasswordInput() {
-        return cy.getByData("password");
+        return cy.getByData('password');
     }
 
     getDayInput() {
-        return cy.getByData("days");
-    }
-
-    getDayInput() {
-        return cy.getByData("days");
+        return cy.getByData('days');
     }
 
     getMonthInput() {
-        return cy.getByData("months");
+        return cy.getByData('months');
     }
 
     getYearInput() {
-        return cy.getByData("years");
+        return cy.getByData('years');
     }
 
     getNewsletterCheckbox() {
@@ -41,56 +37,58 @@ class SignupPage {
     }
 
     getFirstNameInput() {
-        return cy.getByData("first_name");
+        return cy.getByData('first_name');
     }
 
     getLastNameInput() {
-        return cy.getByData("last_name");
+        return cy.getByData('last_name');
     }
 
     getCompanyInput() {
-        return cy.getByData("company");
+        return cy.getByData('company');
     }
 
     getAddressInput() {
-        return cy.getByData("address");
+        return cy.getByData('address');
     }
 
     getAddress2Input() {
-        return cy.getByData("address2");
+        return cy.getByData('address2');
     }
 
     getCountryDropdown() {
-        return cy.getByData("country");
+        return cy.getByData('country');
     }
 
     getStateInput() {
-        return cy.getByData("state");
+        return cy.getByData('state');
     }
 
     getCityInput() {
-        return cy.getByData("city");
+        return cy.getByData('city');
     }
 
     getZipCodeInput() {
-        return cy.getByData("zipcode");
+        return cy.getByData('zipcode');
     }
 
     getMobileNumberInput() {
-        return cy.getByData("mobile_number");
+        return cy.getByData('mobile_number');
     }
 
     getCreateAccountButton() {
-        return cy.getByData("create-account");
+        return cy.getByData('create-account');
     }
 
     assertSignUpFormTitle() {
-        this.getSignupFormTitle().should('be.visible').and(($title) => {
-            expect($title.text).to.contain(/Enter Account Information/gmi);
-        });
+        this.getSignupFormTitle()
+            .should('be.visible')
+            .and(($title) => {
+                expect($title.text).to.contain(/Enter Account Information/gim);
+            });
     }
 
-    fillSignUpForm(userData) {
+    fillSignUpForm(userData: User) {
         const {
             title,
             password,
@@ -104,7 +102,7 @@ class SignupPage {
             state,
             city,
             zipCode,
-            mobileNumber
+            mobileNumber,
         } = userData;
         const { day, month, year } = birthday;
         this.getTitleRadioButton(title).click();
@@ -129,7 +127,6 @@ class SignupPage {
     clickCreateAccountButton() {
         this.getCreateAccountButton().click();
     }
-
 }
 
 export default new SignupPage();

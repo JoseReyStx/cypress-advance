@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "pages/*": [
+                "cypress/pages/*"
+            ]
+        },
+        "target": "ES6",
+        "module": "ES6",
+        "esModuleInterop": true,
+        "isolatedModules": true
+    },
+    "include": [
+        "cypress/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

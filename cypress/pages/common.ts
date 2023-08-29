@@ -1,11 +1,11 @@
 class Common {
-    assertAlertMessage(message) {
+    assertAlertMessage(message: string) {
         cy.on('window:confirm', (alert) => {
             expect(alert).to.eq(message);
         });
     }
 
-    assertLocation(pathname) {
+    assertLocation(pathname: string) {
         cy.location('pathname').should('include', pathname);
     }
 }

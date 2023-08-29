@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-describe("Testing products API", () => {
 
-    it("Get All Products List", () => {
+describe('Testing products API', () => {
+    it('Get All Products List', () => {
         cy.request('GET', '/api/productsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(200);
@@ -9,15 +9,17 @@ describe("Testing products API", () => {
         });
     });
 
-    it("Check Unsupported POST method To All Products List", () => {
+    it('Check Unsupported POST method To All Products List', () => {
         cy.request('POST', '/api/productsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(405);
-            expect(data.message).to.contain('This request method is not supported.');
+            expect(data.message).to.contain(
+                'This request method is not supported.'
+            );
         });
     });
 
-    it("Get All Brands List", () => {
+    it('Get All Brands List', () => {
         cy.request('GET', '/api/brandsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(200);
@@ -25,12 +27,13 @@ describe("Testing products API", () => {
         });
     });
 
-    it("Check Unsupported PUT method To All Brands List", () => {
+    it('Check Unsupported PUT method To All Brands List', () => {
         cy.request('PUT', '/api/brandsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(405);
-            expect(data.message).to.contain('This request method is not supported.');
+            expect(data.message).to.contain(
+                'This request method is not supported.'
+            );
         });
     });
-
 });

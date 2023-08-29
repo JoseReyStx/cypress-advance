@@ -1,4 +1,4 @@
-import genericPage from "./generic-page";
+import genericPage from 'pages/generic-page';
 
 class productsPage {
     getProductList() {
@@ -21,25 +21,38 @@ class productsPage {
         return cy.get('h2.title');
     }
 
-    clickProduct(name) {
+    clickProduct(name: string) {
         // this.getProductItem().contains('View Product').first().click();
-        this.getProductItem().contains(name).parents('.product-image-wrapper').contains('View Product').click();
+        this.getProductItem()
+            .contains(name)
+            .parents('.product-image-wrapper')
+            .contains('View Product')
+            .click();
     }
 
-    clickAddToCart(productQuantity) {
+    clickAddToCart(productQuantity: number) {
         // this.getProductItem().first().trigger('mouseover');
         // this.getProductItem().first().invoke('show');
         for (let product = 0; product < productQuantity; product++) {
-            this.getProductItem().eq(product).find('.product-overlay a').click({ force: true });
+            this.getProductItem()
+                .eq(product)
+                .find('.product-overlay a')
+                .click({ force: true });
             if (product + 1 == productQuantity) {
-                genericPage.getProductModal().find('[href="/view_cart"]').click();
+                genericPage
+                    .getProductModal()
+                    .find('[href="/view_cart"]')
+                    .click();
             } else {
-                genericPage.getProductModal().contains('continue shopping', { matchCase: false }).click();
+                genericPage
+                    .getProductModal()
+                    .contains('continue shopping', { matchCase: false })
+                    .click();
             }
         }
     }
 
-    searchProduct(product) {
+    searchProduct(product: string) {
         this.getSearchProductInput().type(product);
         this.getSearchButton().click();
     }
@@ -52,12 +65,11 @@ class productsPage {
         this.getProductList().should('be.visible');
     }
 
-    assertProductSearch(product) {
-        this.getProductItem().each(element => {
+    assertProductSearch(product: string) {
+        this.getProductItem().each((element) => {
             cy.wrap(element).contains(product, { matchCase: false });
         });
     }
-
 }
 
-export default new productsPage()
+export default new productsPage();

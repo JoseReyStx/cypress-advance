@@ -1,3 +1,5 @@
+import { User } from "cypress/interfaces/user";
+
 class PaymentPage {
     getInputNameOnCard() {
         return cy.getByData('name-on-card');
@@ -27,7 +29,7 @@ class PaymentPage {
     //     return cy.get('#success_message .alert-success');
     // }
 
-    typePaymentInformation(userData) {
+    typePaymentInformation(userData: User) {
         const { firstName, lastName, payment } = userData;
         const { cardNumber, cvc, expirationMonth, expirationYear } = payment;
         this.getInputNameOnCard().type(`${firstName} ${lastName}`);

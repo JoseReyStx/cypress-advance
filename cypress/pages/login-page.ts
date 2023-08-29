@@ -1,7 +1,8 @@
 /// <reference types="Cypress" />
 
-class LoginPage {
+import { User } from "cypress/interfaces/user";
 
+class LoginPage {
     getSignUpForm() {
         return cy.get('.signup-form');
     }
@@ -19,27 +20,27 @@ class LoginPage {
     }
 
     getNameInput() {
-        return cy.getByData("signup-name");
+        return cy.getByData('signup-name');
     }
 
     getEmailSignupInput() {
-        return cy.getByData("signup-email");
+        return cy.getByData('signup-email');
     }
 
     getEmailLoginInput() {
-        return cy.getByData("login-email");
+        return cy.getByData('login-email');
     }
 
     getPasswordInput() {
-        return cy.getByData("login-password");
+        return cy.getByData('login-password');
     }
 
     getLoginButton() {
-        return cy.getByData("login-button");
+        return cy.getByData('login-button');
     }
 
     getSignUpButton() {
-        return cy.getByData("signup-button");
+        return cy.getByData('signup-button');
     }
 
     getErrorLoginLabel() {
@@ -58,7 +59,7 @@ class LoginPage {
         this.getLoginFormTitle().should('have.text', 'Login to your account');
     }
 
-    fillSignUpPreForm(userData) {
+    fillSignUpPreForm(userData: User) {
         const { username, email } = userData;
         this.getNameInput().type(username);
         this.getEmailSignupInput().type(email);
@@ -86,7 +87,7 @@ class LoginPage {
     assertExistenUserErrorLabel() {
         this.getErrorSignupLabel()
             .should('be.visible')
-            .and('have.text', 'Email Address already exist!')
+            .and('have.text', 'Email Address already exist!');
     }
 
     assertCredentialsLabel() {
@@ -94,7 +95,6 @@ class LoginPage {
             .should('be.visible')
             .and('have.text', 'Your email or password is incorrect!');
     }
-
 }
 
 export default new LoginPage();

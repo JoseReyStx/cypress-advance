@@ -1,7 +1,8 @@
 /// <reference types="Cypress" />
 
-class HomePage {
+import { User } from "cypress/interfaces/user";
 
+class HomePage {
     getNavBar() {
         return cy.get('.navbar-nav');
     }
@@ -18,8 +19,10 @@ class HomePage {
         return this.getNavBar().find('a[href="/logout"]');
     }
 
-    getLoggedInAsMenuItem(username) {
-        return this.getNavBar().contains(`Logged in as ${username}`, { matchCase: false });
+    getLoggedInAsMenuItem(username: string) {
+        return this.getNavBar().contains(`Logged in as ${username}`, {
+            matchCase: false,
+        });
     }
 
     getContactUsMenuItem() {
@@ -38,13 +41,14 @@ class HomePage {
         return cy.get('.left-sidebar');
     }
 
-    clickNavBarItem(item) {
+    clickNavBarItem(item: string) {
         this.getNavBar().contains(item).click();
     }
 
-    assertUserLoggedInMenuItem(userData) {
+    assertUserLoggedInMenuItem(userData: User) {
         const { username } = userData;
-        this.getLoggedInAsMenuItem(username).should('be.visible')
+        this.getLoggedInAsMenuItem(username)
+            .should('be.visible')
             .and('contain.text', `Logged in as ${username}`);
     }
 
@@ -52,23 +56,33 @@ class HomePage {
         this.getFooterWidget().find('h2').should('have.text', 'Subscription');
     }
 
-    assertSubscription(userData) {
+    assertSubscription(userData: User) {
         const { email } = userData;
         this.getFooterWidget().find('input[type="email"]').type(email);
         this.getFooterWidget().find('[type="submit"]').click();
-        this.getFooterWidget().find('.alert-success').should('have.text', 'You have been successfully subscribed!');
+        this.getFooterWidget()
+            .find('.alert-success')
+            .should('have.text', 'You have been successfully subscribed!');
     }
 
-    assertAndClickCategory(category) {
+    assertAndClickCategory(category: string) {
         const categoryRegEx = new RegExp(`^.${category}`, 'gmi');
-        this.getSideBar().find('[data-toggle="collapse"]').contains(categoryRegEx).click();
+        this.getSideBar()
+            .find('[data-toggle="collapse"]')
+            .contains(categoryRegEx)
+            .click();
     }
 
-    clickSubCategory(category) {
+    clickSubCategory(category: string) {
         const categoryRegEx = new RegExp(`^.${category}`, 'gmi');
-        this.getSideBar().find('[data-toggle="collapse"]').contains(categoryRegEx).parents('.panel-default').find('.panel-body li > a').first().click();
+        this.getSideBar()
+            .find('[data-toggle="collapse"]')
+            .contains(categoryRegEx)
+            .parents('.panel-default')
+            .find('.panel-body li > a')
+            .first()
+            .click();
     }
-
 }
 
 export default new HomePage();
