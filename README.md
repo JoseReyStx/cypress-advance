@@ -14,3 +14,7 @@ npm install
 ```bash
 npx cypress open
 ```
+or
+```bash
+npm test
+```

@@ -1,3 +1,6 @@
 \node_modules
 cypress.env.json
 cypress\fixtures\user.json
+cypress\reports
+cypress\videos
+cypress\downloads
