@@ -65,7 +65,7 @@ class LoginPage {
         this.getEmailSignupInput().type(email);
     }
 
-    fillLoginForm(userData, wrong = false) {
+    fillLoginForm(userData: User, wrong = false) {
         const { email, password, wrongPassword } = userData;
         if (wrong) {
             this.getEmailLoginInput().type(email);
