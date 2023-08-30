@@ -7,7 +7,6 @@ module.exports = defineConfig({
         embeddedScreenshots: true,
         inlineAssets: true,
         saveAllAttempts: false,
-        autoOpen: true,
         timestamp: true
     },
     retries: 2,
