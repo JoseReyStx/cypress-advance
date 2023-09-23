@@ -21,21 +21,11 @@ class productDetailsPage {
     assertProductDetails() {
         const price = RegExp(/rs.\s\d+/i);
         this.getProductInfo().find('h2').should('be.visible');
-        this.getProductInfo()
-            .contains('category', { matchCase: false })
-            .should('be.visible');
-        this.getProductInfo()
-            .contains(price)
-            .should('be.visible');
-        this.getProductInfo()
-            .contains('Availability:', { matchCase: false })
-            .should('be.visible');
-        this.getProductInfo()
-            .contains('Condition:', { matchCase: false })
-            .should('be.visible');
-        this.getProductInfo()
-            .contains('Brand:', { matchCase: false })
-            .should('be.visible');
+        this.getProductInfo().contains('category', { matchCase: false }).should('be.visible');
+        this.getProductInfo().contains(price).should('be.visible');
+        this.getProductInfo().contains('Availability:', { matchCase: false }).should('be.visible');
+        this.getProductInfo().contains('Condition:', { matchCase: false }).should('be.visible');
+        this.getProductInfo().contains('Brand:', { matchCase: false }).should('be.visible');
     }
 
     typeQuantity(quantity: string) {
@@ -62,9 +52,7 @@ class productDetailsPage {
     }
 
     assertReviewConfirmation() {
-        this.getReviewForm()
-            .contains('Thank you for your review.')
-            .should('be.visible');
+        this.getReviewForm().contains('Thank you for your review.').should('be.visible');
     }
 }
 

@@ -34,15 +34,9 @@ class productsPage {
         // this.getProductItem().first().trigger('mouseover');
         // this.getProductItem().first().invoke('show');
         for (let product = 0; product < productQuantity; product++) {
-            this.getProductItem()
-                .eq(product)
-                .find('.product-overlay a')
-                .click({ force: true });
+            this.getProductItem().eq(product).find('.product-overlay a').click({ force: true });
             if (product + 1 == productQuantity) {
-                genericPage
-                    .getProductModal()
-                    .find('[href="/view_cart"]')
-                    .click();
+                genericPage.getProductModal().find('[href="/view_cart"]').click();
             } else {
                 genericPage
                     .getProductModal()

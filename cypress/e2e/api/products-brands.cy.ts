@@ -13,9 +13,7 @@ describe('Testing products API', () => {
         cy.request('POST', '/api/productsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(405);
-            expect(data.message).to.contain(
-                'This request method is not supported.'
-            );
+            expect(data.message).to.contain('This request method is not supported.');
         });
     });
 
@@ -31,9 +29,7 @@ describe('Testing products API', () => {
         cy.request('PUT', '/api/brandsList').then((response) => {
             const data = JSON.parse(response.body);
             expect(data.responseCode).to.be.eq(405);
-            expect(data.message).to.contain(
-                'This request method is not supported.'
-            );
+            expect(data.message).to.contain('This request method is not supported.');
         });
     });
 });

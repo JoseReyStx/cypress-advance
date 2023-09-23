@@ -1,7 +1,9 @@
 {
     "scripts": {
-        "cy-test": "cypress open",
-        "cy-run": "cypress run"
+        "cy:open": "cypress open",
+        "cy:run": "cypress run",
+        "lint": "eslint **/*.{ts,js,cy.ts} && prettier --check **/*.{ts,cy.ts,js,tsx,json,md,yml}",
+        "prettier": "prettier --write '**/*.{ts,js,tsx,json,md,yml}'"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.5.0",
@@ -9,6 +11,7 @@
         "cypress": "^12.17.2",
         "cypress-mochawesome-reporter": "^3.5.1",
         "eslint": "^8.48.0",
+        "eslint-plugin-cypress": "^2.15.1",
         "prettier": "^3.0.3",
         "typescript": "^5.2.2"
     }

@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { User } from "cypress/interfaces/user";
+import { User } from 'cypress/interfaces/user';
 
 class HomePage {
     getNavBar() {
@@ -67,10 +67,7 @@ class HomePage {
 
     assertAndClickCategory(category: string) {
         const categoryRegEx = new RegExp(`^.${category}`, 'gmi');
-        this.getSideBar()
-            .find('[data-toggle="collapse"]')
-            .contains(categoryRegEx)
-            .click();
+        this.getSideBar().find('[data-toggle="collapse"]').contains(categoryRegEx).click();
     }
 
     clickSubCategory(category: string) {

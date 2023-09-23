@@ -19,8 +19,6 @@ describe('Test cases for contact form feature', () => {
         contactPage.fillContactUsForm(userData);
         contactPage.clickSubmitButton();
         common.assertAlertMessage('Press OK to proceed!');
-        contactPage.assertLabel(
-            'Success! Your details have been submitted successfully.'
-        );
+        contactPage.assertLabel('Success! Your details have been submitted successfully.');
     });
 });

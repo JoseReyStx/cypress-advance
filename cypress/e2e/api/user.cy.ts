@@ -67,9 +67,7 @@ describe('Testing user API', () => {
             const { responseCode, message } = data;
 
             expect(responseCode).to.be.eq(405);
-            expect(message).to.have.string(
-                'This request method is not supported.'
-            );
+            expect(message).to.have.string('This request method is not supported.');
         });
     });
 

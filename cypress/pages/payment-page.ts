@@ -1,4 +1,4 @@
-import { User } from "cypress/interfaces/user";
+import { User } from 'cypress/interfaces/user';
 
 class PaymentPage {
     getInputNameOnCard() {

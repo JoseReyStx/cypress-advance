@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import mochawesome from 'cypress-mochawesome-reporter/plugin';
 
 module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
@@ -7,15 +8,15 @@ module.exports = defineConfig({
         embeddedScreenshots: true,
         inlineAssets: true,
         saveAllAttempts: false,
-        timestamp: true
+        timestamp: true,
     },
     retries: 2,
     e2e: {
         baseUrl: 'https://www.automationexercise.com',
         // watchForFileChanges: false,
-        setupNodeEvents(on, config) {
+        setupNodeEvents(on) {
             // implement node event listeners here
-            require('cypress-mochawesome-reporter/plugin')(on);
+            mochawesome(on);
         },
     },
 });

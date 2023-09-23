@@ -30,10 +30,7 @@ class GenericPage {
     }
 
     clickRegisterLoginModal() {
-        this.getProductModal()
-            .find('a')
-            .contains('Register / Login', { matchCase: false })
-            .click();
+        this.getProductModal().find('a').contains('Register / Login', { matchCase: false }).click();
     }
 
     clickDownloadInvoice() {
