@@ -25,11 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 export {};
 
-declare global {
-    interface Chainable {
-        getByData(selector: string): Chainable<JQuery<HTMLElement>>;
-    }
-}
+declare global {}
 
 Cypress.Commands.add('getByData', (selector) => {
     return cy.get(`[data-qa=${selector}]`);
