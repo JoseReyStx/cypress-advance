@@ -6,13 +6,16 @@
         "prettier": "prettier --write '**/*.{ts,js,tsx,json,md,yml}'"
     },
     "devDependencies": {
+        "@types/node": "^20.8.2",
         "@typescript-eslint/eslint-plugin": "^6.5.0",
         "@typescript-eslint/parser": "^6.5.0",
         "cypress": "^12.17.2",
         "cypress-mochawesome-reporter": "^3.5.1",
         "eslint": "^8.48.0",
         "eslint-plugin-cypress": "^2.15.1",
+        "mysql2": "^3.6.1",
         "prettier": "^3.0.3",
+        "ts-node": "^10.9.1",
         "typescript": "^5.2.2"
     }
 }

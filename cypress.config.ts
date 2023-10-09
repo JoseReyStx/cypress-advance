@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress';
 import mochawesome from 'cypress-mochawesome-reporter/plugin';
+import { queryTestDB } from 'cypress/utils/db-connection';
 
 module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
@@ -16,6 +17,11 @@ module.exports = defineConfig({
         // watchForFileChanges: false,
         setupNodeEvents(on) {
             // implement node event listeners here
+            on('task', {
+                queryDB({ config, query }) {
+                    return queryTestDB(config, query);
+                },
+            });
             mochawesome(on);
         },
     },

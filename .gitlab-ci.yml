@@ -1,0 +1,54 @@
+stages:
+    - build
+    - test
+
+variables:
+    npm_config_cache: '$CI_PROJECT_DIR/.npm'
+    CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+    CYPRESS_IMAGE: cypress/browsers:node18.12.0-chrome106-ff106
+    BROWSER: chrome
+    TEST_CASE: $CI_PROJECT_DIR/cypress/e2e/api/user.cy.ts
+
+cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+        - .npm
+        - cache/Cypress
+        - node_modules
+
+run_scheduled_tests:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "schedule"
+    stage: test
+    image: $CYPRESS_IMAGE
+    retry: 1
+    before_script:
+        # install dependencies
+        - npm ci
+        # start the server in the background
+        # - npm start &
+    script:
+        - echo "Running Cypress tests..."
+        # run Cypress tests
+        - npx cypress run --browser $BROWSER
+
+pre_req:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push"
+    stage: build
+    image: $CYPRESS_IMAGE
+    script:
+        - npm ci
+        - npm run lint
+        - npm run prettier
+
+run_tests:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "push"
+    stage: test
+    image: $CYPRESS_IMAGE
+    retry: 2
+    script:
+        - echo "Running Cypress tests..."
+        # run Cypress tests
+        - npx cypress run --browser $BROWSER --spec $TEST_CASE
