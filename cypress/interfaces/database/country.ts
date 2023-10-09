@@ -1,14 +1,14 @@
 export interface Country {
-    Capital: number;
+    Capital?: number;
     Code: string;
     Code2: string;
     Continent: string;
-    GNP: string;
-    GNPOld: string;
+    GNP?: string;
+    GNPOld?: string;
     GovernmentForm: string;
-    HeadOfState: string;
-    IndepYear: number;
-    LifeExpectancy: string;
+    HeadOfState?: string;
+    IndepYear?: number;
+    LifeExpectancy?: string;
     LocalName: string;
     Name: string;
     Population: number;

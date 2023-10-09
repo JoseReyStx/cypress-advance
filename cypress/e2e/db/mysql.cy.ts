@@ -18,7 +18,6 @@ describe('Testing db in local env', () => {
         const query = 'SELECT * FROM country WHERE name = "Mexico";';
         cy.task('queryDB', { config, query }).then((result) => {
             const resultset = result as Country[];
-            console.log(resultset[0]);
             expect(resultset[0].Population).to.equal(98881000);
             expect(resultset[0].Name).to.equal('Mexico');
         });
