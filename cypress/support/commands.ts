@@ -27,6 +27,6 @@ export {};
 
 declare global {}
 
-Cypress.Commands.add('getByData', (selector) => {
-    return cy.get(`[data-qa=${selector}]`);
+Cypress.Commands.add('getByData', (selector, timeout) => {
+    return cy.get(`[data-qa=${selector}]`, { timeout });
 });

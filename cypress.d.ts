@@ -1,6 +1,6 @@
 declare namespace Cypress {
     interface Chainable {
-        getByData(selector: string): Chainable<JQuery<HTMLElement>>;
+        getByData(selector: string, timeout?: number): Chainable<JQuery<HTMLElement>>;
     }
 }
 declare module 'cypress-mochawesome-reporter/register';

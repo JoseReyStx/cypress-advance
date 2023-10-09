@@ -8,8 +8,8 @@ class SignupPage {
         return loginPage.getLoginFormTitle();
     }
 
-    getTitleRadioButton(title: string) {
-        return cy.getByData('title').find(`input[value="${title}"]`);
+    getTitleRadioButton(title: string, timeout: number = 8000) {
+        return cy.getByData('title', timeout).find(`input[value="${title}"]`);
     }
 
     getPasswordInput() {
